@@ -3,12 +3,10 @@
 
 
 # 目标检测与分类实战
-
-	根据github上的一个[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)参考作为参考，以及[gd32ai-modelzoo](https://github.com/HomiKetalys/gd32ai-modelzoo/tree/main/object_detection/yolo_fastestv2)的代码进行复现，选用[TT100k交通标志检测数据集](https://cg.cs.tsinghua.edu.cn/traffic-sign/)完成检测与分类的任务。模型需要部署到开发板上，对推理速度有一定的要求，最后选用YoloFastestV2模型。
+根据github上的一个[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)参考作为参考，以及[gd32ai-modelzoo](https://github.com/HomiKetalys/gd32ai-modelzoo/tree/main/object_detection/yolo_fastestv2)的代码进行复现，选用[TT100k交通标志检测数据集](https://cg.cs.tsinghua.edu.cn/traffic-sign/)完成检测与分类的任务。模型需要部署到开发板上，对推理速度有一定的要求，最后选用YoloFastestV2模型。
 
 ## 数据的预处理
-
-	因为我们需要将模型部署到gd32开发板上，而摄像头采用ov7670采集图像最大为640\*480,而数据集的图片大小为2048\*2048，所以我们将数据集的图像需要重新做切割。我按照每个图片的每一个标签的中心点做切割，切割成320\*240大小的图像，这样将多目标的数据集转换成了单目标检测的数据集。再将标签数据归一化，转换成了yolo所需的txt文件标签。
+因为我们需要将模型部署到gd32开发板上，而摄像头采用ov7670采集图像最大为640\*480,而数据集的图片大小为2048\*2048，所以我们将数据集的图像需要重新做切割。我按照每个图片的每一个标签的中心点做切割，切割成320\*240大小的图像，这样将多目标的数据集转换成了单目标检测的数据集。再将标签数据归一化，转换成了yolo所需的txt文件标签。
 
 ![文件目录](assets/1717839333124.png)
 
@@ -230,11 +228,11 @@ if __name__ == '__main__':
 
 ## 项目代码
 
-	能力有限，并未对[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)做很大的改动，只是对该项目在本机中运行做遇到问题，做了一点改动。代码也上传至我的github。
+能力有限，并未对[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)做很大的改动，只是对该项目在本机中运行做遇到问题，做了一点改动。代码也上传至我的github。
 
 ## 训练结果
 
-	这样的结果其实我也很惊讶，即使是单目标检测，结果精度都这么低，相比较于coco数据集精度差了将近一倍，我暂时觉得是因为**目标太小**的问题。我暂时无法解决，我看到[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)的作者有采用FPN模型，但是精度还是很低，其实还可以尝试采用其他模型作为训练，但我毕竟不是CV方向，并且时间不够，就没有继续往下钻研。我觉得目标小，有点类似于遥感的目标检测，可以采用遥感的目标检测算法，来检测该数据集（如过不是在嵌入式单片机上跑的话）可能会有好的结果出来。
+这样的结果其实我也很惊讶，即使是单目标检测，结果精度都这么低，相比较于coco数据集精度差了将近一倍，我暂时觉得是因为**目标太小**的问题。我暂时无法解决，我看到[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)的作者有采用FPN模型，但是精度还是很低，其实还可以尝试采用其他模型作为训练，但我毕竟不是CV方向，并且时间不够，就没有继续往下钻研。我觉得目标小，有点类似于遥感的目标检测，可以采用遥感的目标检测算法，来检测该数据集（如过不是在嵌入式单片机上跑的话）可能会有好的结果出来。
 
 ```shell
 D:\anaconda\envs\gd32ai\lib\site-packages\torch\functional.py:512: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\TensorShape.cpp:3588.)
