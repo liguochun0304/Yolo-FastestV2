@@ -1,0 +1,23 @@
+[name]
+model_name=traffic
+
+[train-configure]
+epochs=300
+steps=150,250
+batch_size=64
+subdivisions=1
+learning_rate=0.001
+
+[model-configure]
+pre_weights=None
+classes=59
+width=256
+height=256
+anchor_num=3
+anchors=84.96,186.41, 92.27,81.95, 132.76,212.33, 169.64,125.45, 169.70,63.75, 198.68,214.35
+
+
+[data-configure]
+train=D:\git_km\Yolo-FastestV2\dataset\train.txt
+val_data=D:\git_km\Yolo-FastestV2\dataset\val.txt
+names=./data/trc.names
